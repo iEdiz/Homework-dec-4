@@ -1,0 +1,29 @@
+{
+  "songs": [
+    {
+      "name": "Another World",
+      "performer": "Celestial Aeon Project",
+      "description": "Peaceful, calm medieval music, good as background music",
+      "releaseYear": "2018.",
+      "image": "assets/images/martin-bekerman-lqrXJ4VWraw-unsplash.jpg",
+      "createdAt": "2023-11-21T19:17:43.015Z",
+      "id": 1
+    },
+    {
+      "name": "Rivendell",
+      "performer": "Celestial Aeon Project, Everrune",
+      "description": "A little bit alarming, but at the same time peaceful",
+      "releaseYear": "2018.",
+      "image": "assets/images/kian-lem-pH_1KmQJ140-unsplash.jpg",
+      "createdAt": "2023-11-22T17:12:44.586Z",
+      "id": 2
+    },
+    {
+      "name": "dasd",
+      "performer": "wqeqweqwe",
+      "description": "asdas",
+      "releaseYear": "qweqweqwasdasd",
+      "id": 3
+    }
+  ]
+}
