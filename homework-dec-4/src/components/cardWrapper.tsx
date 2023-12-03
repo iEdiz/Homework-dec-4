@@ -78,6 +78,7 @@ export const CardWrapper: React.FC = () => {
             performer: editedPerformer,
             description: editedDescription,
             releaseYear: editedReleaseYear,
+            image: getRandomImage(),
         })
         await getSongs();
     } catch (error) {
@@ -142,80 +143,89 @@ export const CardWrapper: React.FC = () => {
   }, []);
 
   return (
-    <div className='card-wrapper'>
-      <form className='js-song-edit-form song-form' onSubmit={handleSubmit}>
-        <input
-          type='text'
-          className='song-input'
-          value={isEditing ? editedSongName : newSongName}
-          placeholder='Song name...'
-          onChange={(e) =>
-            isEditing ? setEditSong(e.target.value) : setNewSong(e.target.value)
-          }
-        />
-        <input
-          type='text'
-          className='song-input'
-          value={isEditing ? editedPerformer : newPerformerName}
-          placeholder='Song performer...'
-          onChange={(e) =>
-            isEditing
-              ? setEditPerformer(e.target.value)
-              : setNewPerformer(e.target.value)
-          }
-        />
-        <input
-          type='text'
-          className='song-input'
-          value={isEditing ? editedDescription : newDescription}
-          placeholder='Song description...'
-          onChange={(e) =>
-            isEditing
-              ? setEditDescription(e.target.value)
-              : setNewDescription(e.target.value)
-          }
-        />
-        <input
-          type='text'
-          className='song-input'
-          value={isEditing ? editedReleaseYear : newReleaseYear}
-          placeholder='Release year...'
-          onChange={(e) =>
-            isEditing
-              ? setEditReleaseYear(e.target.value)
-              : setNewReleaseYear(e.target.value)
-          }
-        />
-        <button type='submit' className='add-song-button'>
-          {isEditing ? 'Edit song' : 'Add song'}
-        </button>
-        {isEditing && (
-          <button type='button' onClick={handleCancelEdit}>
-            Cancel
-          </button>
-        )}
-      </form>
-      {songs.map((song) => (
-        <div key={song.id}>
-            <img src={song.image} alt="Medieval image" />
-            <h1>{song.name}</h1>
-            <h3>{song.performer}</h3>
-            <p>{song.description}</p>
-            <h6>{song.releaseYear}</h6>
-            <button
-                className='js-song-delete song__delete'
-                onClick={() => handleDeleteClick(song.id)}
-            >
-            Delete
-            </button>
-            <button
-                className='js-song-edit song__edit'
-                onClick={() => handleEditClick(song)}
-            >
-                Edit
-            </button>
+    <div>
+        <div className='form-wrapper'>
+            <h1 className='form__header'>My CRUD App</h1>
+            <form className='js-song-edit-form song-form' onSubmit={handleSubmit}>
+                <input
+                type='text'
+                className='song__title'
+                value={isEditing ? editedSongName : newSongName}
+                placeholder='Song name...'
+                onChange={(e) =>
+                    isEditing ? setEditSong(e.target.value) : setNewSong(e.target.value)
+                }
+                />
+                <input
+                type='text'
+                className='song__performer'
+                value={isEditing ? editedPerformer : newPerformerName}
+                placeholder='Song performer...'
+                onChange={(e) =>
+                    isEditing
+                    ? setEditPerformer(e.target.value)
+                    : setNewPerformer(e.target.value)
+                }
+                />
+                <input
+                type='text'
+                className='song__description'
+                value={isEditing ? editedDescription : newDescription}
+                placeholder='Song description...'
+                onChange={(e) =>
+                    isEditing
+                    ? setEditDescription(e.target.value)
+                    : setNewDescription(e.target.value)
+                }
+                />
+                <input
+                type='text'
+                className='song__releaseYear'
+                value={isEditing ? editedReleaseYear : newReleaseYear}
+                placeholder='Release year...'
+                onChange={(e) =>
+                    isEditing
+                    ? setEditReleaseYear(e.target.value)
+                    : setNewReleaseYear(e.target.value)
+                }
+                />
+                <div className='add-button-wrapper'>
+                    <button type='submit' className='song__add-button'>
+                    {isEditing ? 'Edit' : 'Add'}
+                    </button>
+                    {isEditing && (
+                    <button type='button' className='song__cancel-button' onClick={handleCancelEdit}>
+                        Cancel
+                    </button>
+                    )}
+                </div>
+            </form>
         </div>
-      ))}
+        <div className='song-card-wrapper'>
+      {songs.map((song) => (
+        <div key={song.id} className='song'>
+            <img src={song.image} alt="Medieval image" className='images'/>
+            <h1 className='title'>{song.name}</h1>
+            <h3 className='performer'>{song.performer}</h3>
+            <h5 className='description'>{song.description}</h5>
+            <h6 className='releaseYear'>{song.releaseYear}</h6>
+            <div className='song__buttons'>
+                <button
+                    className='js-song-delete song__delete'
+                    onClick={() => handleDeleteClick(song.id)}
+                >
+                    Delete
+                </button>
+                <button
+                    className='js-song-edit song__edit'
+                    onClick={() => handleEditClick(song)}
+                >
+                    Edit
+                </button>
+              </div>
+            </div>
+         ))}
+      </div>
     </div>
   );
 };
