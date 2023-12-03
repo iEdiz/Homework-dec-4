@@ -11,6 +11,19 @@ type Song = {
   image: string;
 };
 
+const maxPictures = 20;
+
+const getRandomImage = () => {
+
+    let randomNumbers = Math.floor(Math.random() * maxPictures)
+
+    if (randomNumbers === 0) {
+        randomNumbers++;
+    }
+
+    return `https://generatorfun.com/code/uploads/Random-Medieval-image-${randomNumbers}.jpg`
+}
+
 export const dataBaseURL = 'http://localhost:3030/songs';
 
 export const CardWrapper: React.FC = () => {
@@ -44,6 +57,7 @@ export const CardWrapper: React.FC = () => {
         performer: newPerformerName,
         description: newDescription,
         releaseYear: newReleaseYear,
+        image: getRandomImage(),
       });
 
       setNewSong('');
@@ -183,22 +197,23 @@ export const CardWrapper: React.FC = () => {
       </form>
       {songs.map((song) => (
         <div key={song.id}>
-          <h1>{song.name}</h1>
-          <h3>{song.performer}</h3>
-          <p>{song.description}</p>
-          <h6>{song.releaseYear}</h6>
-          <button
-            className='js-song-delete song__delete'
-            onClick={() => handleDeleteClick(song.id)}
-          >
+            <img src={song.image} alt="Medieval image" />
+            <h1>{song.name}</h1>
+            <h3>{song.performer}</h3>
+            <p>{song.description}</p>
+            <h6>{song.releaseYear}</h6>
+            <button
+                className='js-song-delete song__delete'
+                onClick={() => handleDeleteClick(song.id)}
+            >
             Delete
-          </button>
-          <button
-            className='js-song-edit song__edit'
-            onClick={() => handleEditClick(song)}
-          >
-            Edit
-          </button>
+            </button>
+            <button
+                className='js-song-edit song__edit'
+                onClick={() => handleEditClick(song)}
+            >
+                Edit
+            </button>
         </div>
       ))}
     </div>
