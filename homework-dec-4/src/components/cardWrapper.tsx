@@ -80,6 +80,7 @@ export const CardWrapper: React.FC = () => {
             releaseYear: editedReleaseYear,
             image: getRandomImage(),
         })
+
         await getSongs();
     } catch (error) {
         console.error('Error editing a song', error)
@@ -109,7 +110,7 @@ export const CardWrapper: React.FC = () => {
   const handleCancelEdit = () => {
     setIsEditing(false);
     setEditSongId(null);
-    // Reset the edit state variables
+
     setEditSong('');
     setEditPerformer('');
     setEditDescription('');
