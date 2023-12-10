@@ -24,8 +24,6 @@ const getRandomImage = () => {
     return `https://generatorfun.com/code/uploads/Random-Medieval-image-${randomNumbers}.jpg`
 }
 
-export const dataBaseURL = 'http://localhost:3030/songs';
-
 export const CardWrapper: React.FC = () => {
   const [songs, setSongs] = useState<Song[]>([]);
   const [newSongName, setNewSong] = useState('');
@@ -43,16 +41,20 @@ export const CardWrapper: React.FC = () => {
 
   const getSongs = async () => {
     try {
-      const response = await axios.get(dataBaseURL);
-      setSongs(response.data || []);
+       const response = await axios.get('http://localhost:3001/songs');
+       const songsData = response.data.songs || [];
+       setSongs(songsData);
+       return songsData;
     } catch (error) {
-      console.error('Error getting song data', error);
+       console.error('Error getting song data', error);
+       return [];
     }
-  };
+ };
+ 
 
   const addSong = async () => {
     try {
-      await axios.post(dataBaseURL, {
+      await axios.post('http://localhost:3001/song', {
         name: newSongName,
         performer: newPerformerName,
         description: newDescription,
@@ -65,7 +67,7 @@ export const CardWrapper: React.FC = () => {
       setNewDescription('');
       setNewReleaseYear('');
 
-      await getSongs()
+      await getSongs();
     } catch (error) {
       console.error('Error adding a song', error);
     }
@@ -73,7 +75,7 @@ export const CardWrapper: React.FC = () => {
 
   const editSong = async (id: number) => {
     try {
-        await axios.put(`http://localhost:3030/songs/${id}`, {
+        await axios.put(`http://localhost:3001/songs/${id}`, {
             name: editedSongName,
             performer: editedPerformer,
             description: editedDescription,
@@ -90,7 +92,7 @@ export const CardWrapper: React.FC = () => {
   const handleDeleteClick = async (id: number) => {
 
     try {
-         await axios.delete(`http://localhost:3030/songs/${id}`)
+         await axios.delete(`http://localhost:3001/songs/${id}`)
 
         getSongs();
     } catch(error) {
@@ -203,7 +205,7 @@ export const CardWrapper: React.FC = () => {
             </form>
         </div>
         <div className='song-card-wrapper'>
-      {songs.map((song) => (
+      {Array.isArray(songs) && songs.map((song) => (
         <div key={song.id} className='song'>
             <img src={song.image} alt="Medieval image" className='images'/>
             <h1 className='title'>{song.name}</h1>
