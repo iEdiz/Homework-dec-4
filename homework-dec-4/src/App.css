@@ -182,9 +182,9 @@ body {
   background-color: rgb(245, 242, 242);
   font-size: 18px;
 
-  &:focus {
-    box-shadow: 0 0 5px 3px rgb(174, 163, 148);
-    transition: 0.2s;
+    &:focus {
+      box-shadow: 0 0 5px 3px rgb(174, 163, 148);
+      transition: 0.2s;
   }
 }
 
