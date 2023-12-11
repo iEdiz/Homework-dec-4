@@ -50,7 +50,6 @@ export const CardWrapper: React.FC = () => {
        return [];
     }
  };
- 
 
   const addSong = async () => {
     try {
@@ -140,7 +139,6 @@ export const CardWrapper: React.FC = () => {
     await getSongs();
   };
 
-
   useEffect(() => {
     getSongs();
   }, []);
@@ -205,7 +203,7 @@ export const CardWrapper: React.FC = () => {
             </form>
         </div>
         <div className='song-card-wrapper'>
-      {Array.isArray(songs) && songs.map((song) => (
+      {songs.map((song) => (
         <div key={song.id} className='song'>
             <img src={song.image} alt="Medieval image" className='images'/>
             <h1 className='title'>{song.name}</h1>
